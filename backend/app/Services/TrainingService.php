@@ -2,18 +2,20 @@
 
 namespace App\Services;
 
+use App\Models\Training;
 use App\Repositories\TrainingRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class TrainingService
 {
-    protected $trainingRepository;
+    protected TrainingRepository $trainingRepository;
 
     public function __construct(TrainingRepository $trainingRepository)
     {
         $this->trainingRepository = $trainingRepository;
     }
 
-    public function getAllTrainings()
+    public function getAllTrainings(): Collection
     {
         return $this->trainingRepository->getAll();
     }
@@ -28,13 +30,13 @@ class TrainingService
         return $this->trainingRepository->create($data);
     }
 
-    public function updateTraining($id, array $data)
+    public function updateTraining($id, array $data): Training
     {
         $training = $this->trainingRepository->find($id);
         return $this->trainingRepository->update($training, $data);
     }
 
-    public function deleteTraining($id)
+    public function deleteTraining($id): ?bool
     {
         $training = $this->trainingRepository->find($id);
         return $this->trainingRepository->delete($training);

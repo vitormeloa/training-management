@@ -8,16 +8,16 @@ class TrainingObserver
 {
     public function created(Training $training)
     {
-        // Lógica quando um treinamento é criado
+        //TODO: lógica de observador de criação de treinamento.
     }
 
     public function updated(Training $training)
     {
-        // Lógica quando um treinamento é atualizado
+        //TODO: lógica de observador de edição de treinamento.
     }
 
     public function deleted(Training $training)
     {
-        // Lógica quando um treinamento é deletado
+        //TODO: lógica de observador de deleção de treinamento.
     }
 }
