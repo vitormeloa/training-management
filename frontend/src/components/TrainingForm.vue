@@ -28,7 +28,10 @@ export default {
   methods: {
     ...mapActions(["createTraining"]),
     async handleAddTraining() {
-      await this.createTraining({ title: this.title, description: this.description });
+      await this.createTraining({
+        title: this.title,
+        description: this.description,
+      });
       this.title = "";
       this.description = "";
       this.$router.push("/trainings");

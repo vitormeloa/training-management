@@ -7,22 +7,22 @@
 </template>
 
 <script>
-import apiClient from '../apiClient';
+import apiClient from "../apiClient";
 
 export default {
   data() {
     return {
-      message: '',
+      message: "",
     };
   },
   methods: {
     async testBackend() {
       try {
-        const response = await apiClient.get('/test');
+        const response = await apiClient.get("/test");
         this.message = response.data.message;
       } catch (error) {
-        console.error('Error communicating with backend:', error);
-        this.message = 'Failed to communicate with backend';
+        console.error("Error communicating with backend:", error);
+        this.message = "Failed to communicate with backend";
       }
     },
   },

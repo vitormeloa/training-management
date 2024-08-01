@@ -1,21 +1,21 @@
-import apiClient from '../../apiClient';
+import apiClient from "../../apiClient";
 
 const state = {
   trainings: [],
 };
 
 const getters = {
-  allTrainings: state => state.trainings,
+  allTrainings: (state) => state.trainings,
 };
 
 const actions = {
   async fetchTrainings({ commit }) {
-    const response = await apiClient.get('/trainings');
-    commit('setTrainings', response.data);
+    const response = await apiClient.get("/trainings");
+    commit("setTrainings", response.data);
   },
   async createTraining({ commit }, training) {
-    const response = await apiClient.post('/trainings', training);
-    commit('newTraining', response.data);
+    const response = await apiClient.post("/trainings", training);
+    commit("newTraining", response.data);
   },
 };
 

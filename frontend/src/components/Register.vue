@@ -33,7 +33,11 @@ export default {
   methods: {
     ...mapActions(["registerUser"]),
     async handleRegister() {
-      await this.registerUser({name: this.name, email: this.email, password: this.password});
+      await this.registerUser({
+        name: this.name,
+        email: this.email,
+        password: this.password,
+      });
       this.$router.push("/login");
     },
   },
