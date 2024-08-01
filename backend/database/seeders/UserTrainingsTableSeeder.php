@@ -2,16 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\UserTraining;
 use Illuminate\Database\Seeder;
 
 class UserTrainingsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        UserTraining::factory(20)->create();
     }
 }
+
