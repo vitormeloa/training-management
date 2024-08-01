@@ -36,8 +36,7 @@ project-root/
 │   │   └── entrypoint.sh
 │   ├── vue/
 │   │   └── Dockerfile
-│   ├── nginx/
-│   │   └── nginx.conf
+│   ├── docker-compose.yml
 ├── frontend/
 │   ├── public/
 │   ├── src/
@@ -53,7 +52,6 @@ project-root/
 │   ├── package-lock.json
 │   ├── vue.config.js
 │   ├── .eslintrc.js
-├── docker-compose.yml
 ├── setup.sh
 └── README.md
 ```
@@ -87,12 +85,6 @@ chmod +x setup.sh
 Para rodar as migrations, execute o comando abaixo:
 ```bash
 docker exec -it backend php artisan migrate
-```
-
-### Rodar Testes
-Para rodar os testes, execute o comando abaixo:
-```bash
-docker exec -it backend php artisan test
 ```
 
 ### Popular o Banco de Dados
