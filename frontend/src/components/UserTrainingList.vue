@@ -10,17 +10,17 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(['allUserTrainings']),
+    ...mapGetters(["allUserTrainings"]),
   },
   created() {
     this.fetchUserTrainings();
   },
   methods: {
-    ...mapActions(['fetchUserTrainings']),
+    ...mapActions(["fetchUserTrainings"]),
   },
 };
 </script>

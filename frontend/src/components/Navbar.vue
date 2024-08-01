@@ -1,40 +1,39 @@
 <template>
   <nav class="navbar">
-    <router-link to="/">Home</router-link>
-    <router-link to="/login" v-if="!isAuthenticated">Login</router-link>
-    <router-link to="/register" v-if="!isAuthenticated">Register</router-link>
-    <router-link to="/trainings" v-if="isAuthenticated">Trainings</router-link>
-    <router-link to="/user-trainings" v-if="isAuthenticated">User Trainings</router-link>
-    <a @click="logout" v-if="isAuthenticated">Logout</a>
+    <router-link to="/" class="nav-item">Home</router-link>
+    <router-link to="/login" class="nav-item">Login</router-link>
+    <router-link to="/register" class="nav-item">Cadastro</router-link>
+    <router-link to="/trainings" class="nav-item">Treinamentos</router-link>
   </nav>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-
 export default {
-  computed: {
-    ...mapGetters(['isAuthenticated']),
-  },
-  methods: {
-    ...mapActions(['logout']),
-  },
+  name: 'Navbar',
 };
 </script>
 
 <style scoped>
 .navbar {
-  background-color: #007bff;
-  padding: 1em;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  background-color: #007bff;
+  padding: 1em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  margin: 0;
 }
-.navbar a {
+
+.nav-item {
   color: white;
   text-decoration: none;
-  padding: 0.5em;
+  padding: 0.5em 1em;
 }
-.navbar a:hover {
+
+.nav-item:hover {
   background-color: #0056b3;
   border-radius: 5px;
 }

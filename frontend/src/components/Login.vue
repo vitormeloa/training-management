@@ -3,14 +3,14 @@
     <h2>Login</h2>
     <form @submit.prevent="login">
       <div class="form-group">
-        <label for="email">Email:</label>
+        <label for="email">E-mail:</label>
         <input type="email" v-model="email" required />
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
+        <label for="password">Senha:</label>
         <input type="password" v-model="password" required />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit">Entrar</button>
     </form>
   </div>
 </template>
@@ -38,8 +38,9 @@ export default {
 <style scoped>
 .login {
   max-width: 400px;
-  margin: auto;
-  padding: 1em;
+  margin-top: 10em;
+  margin-left: 37em;
+  padding: 5em;
   border-radius: 5px;
   background: #f9f9f9;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

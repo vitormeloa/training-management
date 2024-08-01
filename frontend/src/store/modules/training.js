@@ -1,45 +1,32 @@
-import axios from 'axios';
+import apiClient from '../../apiClient';
 
 const state = {
-    trainings: [],
-    userTrainings: [],
+  trainings: [],
 };
 
 const getters = {
-    allTrainings: state => state.trainings,
-    allUserTrainings: state => state.userTrainings,
+  allTrainings: state => state.trainings,
 };
 
 const actions = {
-    async fetchTrainings({commit}) {
-        let response = await axios.get('http://localhost:8000/api/trainings');
-        commit('setTrainings', response.data);
-    },
-    async addTraining({commit}, training) {
-        let response = await axios.post('http://localhost:8000/api/trainings', training);
-        commit('newTraining', response.data);
-    },
-    async fetchUserTrainings({commit}) {
-        let response = await axios.get('http://localhost:8000/api/user-trainings');
-        commit('setUserTrainings', response.data);
-    },
+  async fetchTrainings({ commit }) {
+    const response = await apiClient.get('/trainings');
+    commit('setTrainings', response.data);
+  },
+  async createTraining({ commit }, training) {
+    const response = await apiClient.post('/trainings', training);
+    commit('newTraining', response.data);
+  },
 };
 
 const mutations = {
-    setTrainings(state, trainings) {
-        state.trainings = trainings;
-    },
-    newTraining(state, training) {
-        state.trainings.push(training);
-    },
-    setUserTrainings(state, userTrainings) {
-        state.userTrainings = userTrainings;
-    },
+  setTrainings: (state, trainings) => (state.trainings = trainings),
+  newTraining: (state, training) => state.trainings.unshift(training),
 };
 
 export default {
-    state,
-    getters,
-    actions,
-    mutations,
+  state,
+  getters,
+  actions,
+  mutations,
 };

@@ -1,52 +1,50 @@
-import axios from 'axios';
+import apiClient from '../../apiClient';
 
 const state = {
-    token: localStorage.getItem('token') || '',
-    user: {},
+  user: null,
+  token: localStorage.getItem('token') || '',
 };
 
 const getters = {
-    isAuthenticated: state => !!state.token,
-    authStatus: state => state.status,
+  isAuthenticated: state => !!state.token,
+  stateUser: state => state.user,
 };
 
 const actions = {
-    async register({commit}, user) {
-        let response = await axios.post('http://localhost:8000/api/register', user);
-        let token = response.data.token;
-        localStorage.setItem('token', token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        commit('auth_success', token, user);
-    },
-    async login({commit}, user) {
-        let response = await axios.post('http://localhost:8000/api/login', user);
-        let token = response.data.token;
-        localStorage.setItem('token', token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        commit('auth_success', token, user);
-    },
-    async logout({commit}) {
-        await axios.post('http://localhost:8000/api/logout');
-        commit('logout');
-        localStorage.removeItem('token');
-        delete axios.defaults.headers.common['Authorization'];
-    },
+  async registerUser({ dispatch }, form) {
+    await apiClient.post('/register', form);
+    const UserForm = new FormData();
+    UserForm.append('email', form.email);
+    UserForm.append('password', form.password);
+    await dispatch('logIn', UserForm);
+  },
+  async logIn({ commit }, user) {
+    const response = await apiClient.post('/login', user);
+    await commit('setUser', response.data.user);
+    await commit('setToken', response.data.token);
+  },
+  async logOut({ commit }) {
+    let user = null;
+    commit('logOut', user);
+  },
 };
 
 const mutations = {
-    auth_success(state, token, user) {
-        state.token = token;
-        state.user = user;
-    },
-    logout(state) {
-        state.token = '';
-        state.user = {};
-    },
+  setUser(state, username) {
+    state.user = username;
+  },
+  setToken(state, token) {
+    state.token = token;
+  },
+  logOut(state) {
+    state.user = null;
+    state.token = '';
+  },
 };
 
 export default {
-    state,
-    getters,
-    actions,
-    mutations,
+  state,
+  getters,
+  actions,
+  mutations,
 };

@@ -1,14 +1,14 @@
 <template>
   <div class="training-form">
-    <h2>Create Training</h2>
-    <form @submit.prevent="addTraining">
+    <h2>Adicionar Treinamento</h2>
+    <form @submit.prevent="handleAddTraining">
       <div class="form-group">
-        <label for="title">Title:</label>
+        <label for="title">Título:</label>
         <input type="text" v-model="title" required />
       </div>
       <div class="form-group">
-        <label for="description">Description:</label>
-        <input type="text" v-model="description" required />
+        <label for="description">Descrição:</label>
+        <textarea v-model="description" required></textarea>
       </div>
       <button type="submit">Add Training</button>
     </form>
@@ -16,22 +16,22 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      title: '',
-      description: '',
+      title: "",
+      description: "",
     };
   },
   methods: {
-    ...mapActions(['addTraining']),
-    async addTraining() {
-      await this.addTraining({ title: this.title, description: this.description });
-      this.title = '';
-      this.description = '';
-      this.$emit('trainingAdded');
+    ...mapActions(["createTraining"]),
+    async handleAddTraining() {
+      await this.createTraining({ title: this.title, description: this.description });
+      this.title = "";
+      this.description = "";
+      this.$router.push("/trainings");
     },
   },
 };
@@ -40,8 +40,9 @@ export default {
 <style scoped>
 .training-form {
   max-width: 400px;
-  margin: auto;
-  padding: 1em;
+  margin-top: 10em;
+  margin-left: 37em;
+  padding: 5em;
   border-radius: 5px;
   background: #f9f9f9;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -53,7 +54,8 @@ export default {
   display: block;
   margin-bottom: 0.5em;
 }
-.form-group input {
+.form-group input,
+.form-group textarea {
   width: 100%;
   padding: 0.5em;
   border: 1px solid #ccc;

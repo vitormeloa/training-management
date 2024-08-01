@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue';
-import UserTrainingList from '../components/UserTrainingList.vue';
+import Navbar from "../components/Navbar.vue";
+import UserTrainingList from "../components/UserTrainingList.vue";
 
 export default {
   components: {

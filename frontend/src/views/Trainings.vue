@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue';
-import TrainingForm from '../components/TrainingForm.vue';
-import TrainingList from '../components/TrainingList.vue';
-import { mapActions } from 'vuex';
+import Navbar from "../components/Navbar.vue";
+import TrainingForm from "../components/TrainingForm.vue";
+import TrainingList from "../components/TrainingList.vue";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -19,7 +19,7 @@ export default {
     TrainingList,
   },
   methods: {
-    ...mapActions(['fetchTrainings']),
+    ...mapActions(["fetchTrainings"]),
   },
   created() {
     this.fetchTrainings();

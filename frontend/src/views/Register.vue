@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue';
-import Register from '../components/Register.vue';
+import Navbar from "../components/Navbar.vue";
+import Register from "../components/Register.vue";
 
 export default {
   components: {

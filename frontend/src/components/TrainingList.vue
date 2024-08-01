@@ -1,6 +1,6 @@
 <template>
   <div class="training-list">
-    <h2>Trainings</h2>
+    <h2>Treinamentos</h2>
     <ul>
       <li v-for="training in trainings" :key="training.id">
         {{ training.title }} - {{ training.description }}
@@ -10,17 +10,17 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(['allTrainings']),
+    ...mapGetters(["allTrainings"]),
   },
   created() {
     this.fetchTrainings();
   },
   methods: {
-    ...mapActions(['fetchTrainings']),
+    ...mapActions(["fetchTrainings"]),
   },
 };
 </script>
@@ -28,8 +28,10 @@ export default {
 <style scoped>
 .training-list {
   max-width: 600px;
-  margin: auto;
-  padding: 1em;
+  margin-top: 5em;
+  margin-left: 30em;
+  margin-bottom: 5em;
+  padding: 5em;
   border-radius: 5px;
   background: #f9f9f9;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

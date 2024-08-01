@@ -1,15 +1,13 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import axios from 'axios';
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import apiClient from "./apiClient";
 
-Vue.config.productionTip = false;
+const app = createApp(App);
 
-axios.defaults.baseURL = 'http://localhost:8000/api';
+app.config.globalProperties.$http = apiClient;
 
-new Vue({
-    router,
-    store,
-    render: h => h(App),
-}).$mount('#app');
+app.use(router);
+app.use(store);
+app.mount("#app");

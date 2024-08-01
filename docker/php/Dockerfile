@@ -36,7 +36,7 @@ RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 775 /var/www/html && \
     chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-EXPOSE 9000
+EXPOSE 8000
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]
