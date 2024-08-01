@@ -5,7 +5,7 @@ Desenvolver uma aplicação web que inclui uma interface de usuário (frontend) 
 
 ## Tecnologias Utilizadas
 - PHP 8.3
-- MySQL 8.0.32
+- MySQL 8.0
 - Laravel 11
 - Vue 3.2
 - Vuex 4.0

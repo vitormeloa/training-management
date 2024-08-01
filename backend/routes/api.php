@@ -13,3 +13,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('trainings', TrainingController::class);
     Route::apiResource('user-trainings', UserTrainingController::class);
 });
+
+Route::get('/test', function () {
+    return response()->json(['message' => 'Backend is working!']);
+});
