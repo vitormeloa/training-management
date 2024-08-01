@@ -3,23 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Services\TrainingService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TrainingController extends Controller
 {
-    protected $trainingService;
+    protected TrainingService $trainingService;
 
     public function __construct(TrainingService $trainingService)
     {
         $this->trainingService = $trainingService;
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json($this->trainingService->getAllTrainings());
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
@@ -30,12 +31,12 @@ class TrainingController extends Controller
         return response()->json($training, 201);
     }
 
-    public function show($id)
+    public function show($id): JsonResponse
     {
         return response()->json($this->trainingService->getTrainingById($id));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         $validatedData = $request->validate([
             'title' => 'sometimes|string|max:255',
@@ -46,7 +47,7 @@ class TrainingController extends Controller
         return response()->json($training, 200);
     }
 
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $this->trainingService->deleteTraining($id);
         return response()->json(null, 204);
