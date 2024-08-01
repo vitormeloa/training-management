@@ -1,0 +1,25 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
+import Login from '../views/Login.vue';
+import Register from '../views/Register.vue';
+import Trainings from '../views/Trainings.vue';
+import UserTrainings from '../views/UserTrainings.vue';
+
+Vue.use(VueRouter);
+
+const routes = [
+  { path: '/', name: 'Home', component: Home },
+  { path: '/login', name: 'Login', component: Login },
+  { path: '/register', name: 'Register', component: Register },
+  { path: '/trainings', name: 'Trainings', component: Trainings },
+  { path: '/user-trainings', name: 'UserTrainings', component: UserTrainings },
+];
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes,
+});
+
+export default router;
