@@ -2,22 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\UserTraining;
+use App\Models\User;
+use App\Models\Training;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserTraining>
- */
 class UserTrainingFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = UserTraining::class;
+
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'training_id' => Training::factory(),
+            'completed' => $this->faker->boolean,
         ];
     }
 }
