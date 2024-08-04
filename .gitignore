@@ -1,0 +1,146 @@
+# Laravel & PHP
+/vendor/
+/node_modules/
+/public/storage
+/storage/*.key
+/.env
+.phpunit.result.cache
+Homestead.yaml
+Homestead.json
+.env.backup
+.env.local
+.env.development
+.env.testing
+.env.production
+
+# Docker
+docker-compose.override.yml
+
+# IDEs
+.idea
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Logs and system files
+*.log
+*.swp
+*.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+*.ini
+*.sqlite
+*.sql
+*.bak
+*.orig
+*.swp
+*.swo
+*.tmp
+*.pid
+*.seed
+*.lock
+*.tmp
+*.bak
+*.backup
+*.swp
+*.swo
+*.log
+*.log.*
+*.mxl
+*.out
+
+# Ignorar arquivos do PHPUnit
+.phpunit.result.cache
+
+# Ignorar configurações locais do usuário
+/.vscode/
+/nbproject/
+nbproject/private/
+/.idea/
+/*.iml
+
+# Ignorar arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Composer e pacotes do NPM
+/vendor/
+/node_modules/
+
+# Ambiente de desenvolvimento
+.env
+.env.*
+.env.*.backup
+
+# Cache e logs do Laravel
+/storage/framework/cache/*
+/storage/framework/views/*
+/storage/framework/sessions/*
+/storage/logs/*
+
+# Arquivos de build
+/build
+/dist
+
+# Arquivos do editor PHPStorm
+.idea/
+
+# Arquivos do JetBrains IDE
+*.iml
+/.idea/*
+.idea
+
+# Arquivos do sistema operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# Configurações de cache e log do PHPStorm
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/webServers.xml
+.idea/php.xml
+.idea/phpunit.xml
+.idea/encodings.xml
+.idea/modules.xml
+.idea/codeStyles
+.idea/sqlDataSources.xml
+.idea/sqlDataSources.xml
+.idea/sqlDataSources.local.xml
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/dataSources.*
+.idea/sql/dialects.xml
+.idea/jarRepositories.xml
+.idea/artifacts
+.idea/webResources.xml
+.idea/dynamic.xml
+.idea/vcs.xml
+.idea/sonarIssues.xml
+.idea/sonarlint
+.idea/scopes
+
+# Arquivos do sistema operacional
+.Spotlight-V100
+.Trashes
+*.swp
+*~
+*.swo
+*.swn
+*.bak
+*.backup
+*.tmp
