@@ -1,48 +1,106 @@
 #!/bin/bash
 
-setup_frontend() {
-  echo "Configurando o frontend..."
-  cd frontend || exit
-  npm install
-  cd ..
+# Função para exibir mensagens de erro
+error_exit() {
+    echo "$1" 1>&2
+    exit 1
 }
 
-setup_backend() {
-  echo "Configurando o backend..."
-  cd backend || exit
-  composer install
-  cp .env.example .env
-  php artisan key:generate
-  cd ..
-}
+# Verificar e instalar Composer
+if ! [ -x "$(command -v composer)" ]; then
+    echo "Composer não encontrado. Instalando Composer..."
+    EXPECTED_SIGNATURE="$(curl -s https://composer.github.io/installer.sig)"
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    ACTUAL_SIGNATURE="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
 
-setup_database() {
-  echo "Preparando o banco de dados..."
-  until docker exec mysql mysqladmin ping -p'password' --silent; do
-    echo "Esperando o MySQL iniciar..."
-    sleep 2
-  done
-  docker exec -it backend php artisan migrate
-}
+    if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]; then
+        echo "Assinatura do instalador do Composer inválida." >&2
+        rm composer-setup.php
+        exit 1
+    fi
 
-start_docker() {
-  echo "Iniciando os contêineres Docker..."
-  docker-compose up --build -d
-}
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    RESULT=$?
+    rm composer-setup.php
+    if [ $RESULT -ne 0 ]; then
+        error_exit "Erro ao instalar o Composer."
+    fi
+    echo "Composer instalado com sucesso."
+else
+    echo "Composer já está instalado."
+fi
 
+# Verificar e instalar Docker
 if ! [ -x "$(command -v docker)" ]; then
-  echo "Erro: Docker não está instalado." >&2
-  exit 1
+    echo "Docker não encontrado. Instalando Docker..."
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh || error_exit "Erro ao instalar o Docker."
+    rm get-docker.sh
+    echo "Docker instalado com sucesso."
+else
+    echo "Docker já está instalado."
 fi
 
+# Verificar e instalar Docker Compose
 if ! [ -x "$(command -v docker-compose)" ]; then
-  echo "Erro: Docker Compose não está instalado." >&2
-  exit 1
+    echo "Docker Compose não encontrado. Instalando Docker Compose..."
+    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    echo "Docker Compose instalado com sucesso."
+else
+    echo "Docker Compose já está instalado."
 fi
 
-start_docker
-setup_frontend
-setup_backend
-setup_database
+# Verificar e instalar Node.js e npm
+if ! [ -x "$(command -v node)" ]; then
+    echo "Node.js não encontrado. Instalando Node.js e npm..."
+    curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+    sudo apt-get install -y nodejs || error_exit "Erro ao instalar o Node.js e npm."
+    echo "Node.js e npm instalados com sucesso."
+else
+    echo "Node.js já está instalado."
+fi
 
-echo "Setup completo! Acesse o frontend em http://localhost:8080 e o backend em http://localhost:9000."
+# Configuração do backend usando Laravel Sail
+echo "Iniciando a configuração do backend..."
+
+cd backend || error_exit "Erro ao acessar o diretório do backend."
+
+# Instalar dependências do backend
+echo "Instalando dependências do backend..."
+composer install || error_exit "Erro ao instalar as dependências do backend."
+
+# Iniciar o Sail
+echo "Iniciando o Sail..."
+./vendor/bin/sail up -d || error_exit "Erro ao iniciar o Sail."
+
+# Executar migrações
+echo "Executando migrações..."
+./vendor/bin/sail artisan migrate:fresh || error_exit "Erro ao executar as migrações."
+
+# Executar seeders
+echo "Executando seeders..."
+./vendor/bin/sail artisan db:seed || error_exit "Erro ao executar os seeders."
+
+echo "Backend configurado com sucesso."
+
+# Configuração do frontend
+echo "Iniciando a configuração do frontend..."
+
+cd ../frontend || error_exit "Erro ao acessar o diretório do frontend."
+
+# Instalar dependências do frontend
+echo "Instalando dependências do frontend..."
+npm install || error_exit "Erro ao instalar as dependências do frontend."
+
+# Corrigir problemas de linting
+echo "Executando ESLint..."
+npx eslint --fix src/**/*.vue src/**/*.js || error_exit "Erro ao executar o ESLint."
+
+# Iniciar o servidor de desenvolvimento do frontend
+echo "Iniciando o servidor de desenvolvimento do frontend..."
+npm run serve || error_exit "Erro ao iniciar o servidor de desenvolvimento do frontend."
+
+echo "Frontend configurado com sucesso."
+
+echo "Setup completo do projeto realizado com sucesso."

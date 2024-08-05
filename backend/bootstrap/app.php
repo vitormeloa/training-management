@@ -14,13 +14,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->api([
-            EnsureFrontendRequestsAreStateful::class,
-        ]);
-        $middleware->web();
-        $middleware->encryptCookies();
+//        $middleware->api(prepend: [
+//            EnsureFrontendRequestsAreStateful::class
+//        ]);
         $middleware->validateCsrfTokens(except: [
-            'http://localhost:8080/*'
+            'http://localhost:8080/*',
+            'http://localhost:8081/*',
+            'http://localhost/api/*',
+            'http://localhost:3000/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

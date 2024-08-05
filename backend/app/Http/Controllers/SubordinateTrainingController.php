@@ -11,7 +11,7 @@ class SubordinateTrainingController extends Controller
 {
     public function index(): Collection
     {
-        return SubordinateTraining::all();
+        return SubordinateTraining::with('subordinate')->get();
     }
 
     public function store(Request $request)

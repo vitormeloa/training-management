@@ -14,4 +14,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('subordinates', SubordinateController::class);
     Route::resource('subordinate-trainings', SubordinateTrainingController::class);
     Route::post('logout', [AuthController::class, 'logout']);
+
+    Route::get('user', [AuthController::class, 'user']);
+});
+
+Route::get('/test-connection', function () {
+    return response()->json(['message' => 'Connection successful'], 200);
 });

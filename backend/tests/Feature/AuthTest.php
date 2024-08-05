@@ -43,17 +43,17 @@ it('can login a user', function () {
         ]);
 });
 
-//it('can logout a user', function () {
-//    $user = User::factory()->create([
-//        'email' => 'gestor@teste.com',
-//        'password' => bcrypt('senha123')
-//    ]);
-//
-//    $token = $user->createToken('auth_token')->plainTextToken;
-//
-//    $response = $this->actingAs($user, 'sanctum')
-//        ->postJson('/api/logout');
-//
-//    $response->assertStatus(200)
-//        ->assertJson(['message' => 'Logout realizado com sucesso']);
-//});
+it('can logout a user', function () {
+    $user = User::factory()->create([
+        'email' => 'gestor@teste.com',
+        'password' => bcrypt('senha123')
+    ]);
+
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    $response = $this->actingAs($user, 'sanctum')
+        ->postJson('/api/logout');
+
+    $response->assertStatus(200)
+        ->assertJson(['message' => 'Logout realizado com sucesso']);
+});
