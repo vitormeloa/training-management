@@ -1,7 +1,10 @@
-# Teste Desenvolvedor Full Stack – Pleno+
+# Projeto de Gestão de Treinamentos
 
 ## Objetivo
 Desenvolver uma aplicação web que inclui uma interface de usuário (frontend) conectada a uma API REST.
+
+## Contexto
+O gestor da empresa XYZ precisa gerenciar em seu sistema se seus subordinados estão realizando os treinamentos corporativos disponibilizados na plataforma.
 
 ## Tecnologias Utilizadas
 - PHP 8.3
