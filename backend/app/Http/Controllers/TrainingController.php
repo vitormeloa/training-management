@@ -2,54 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\TrainingService;
-use Illuminate\Http\JsonResponse;
+use App\Models\Training;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TrainingController extends Controller
 {
-    protected TrainingService $trainingService;
-
-    public function __construct(TrainingService $trainingService)
+    public function index(): Collection
     {
-        $this->trainingService = $trainingService;
+        return Training::all();
     }
 
-    public function index(): JsonResponse
+    public function store(Request $request)
     {
-        return response()->json($this->trainingService->getAllTrainings());
-    }
-
-    public function store(Request $request): JsonResponse
-    {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
-        $training = $this->trainingService->createTraining($validatedData);
-        return response()->json($training, 201);
+        return Training::create($request->all());
     }
 
-    public function show($id): JsonResponse
+    public function show(Training $training): Training
     {
-        return response()->json($this->trainingService->getTrainingById($id));
+        return $training;
     }
 
-    public function update(Request $request, $id): JsonResponse
+    public function update(Request $request, Training $training): Training
     {
-        $validatedData = $request->validate([
-            'title' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
-        $training = $this->trainingService->updateTraining($id, $validatedData);
-        return response()->json($training, 200);
+        $training->update($request->all());
+
+        return $training;
     }
 
-    public function destroy($id): JsonResponse
+    public function destroy(Training $training): Response
     {
-        $this->trainingService->deleteTraining($id);
-        return response()->json(null, 204);
+        $training->delete();
+
+        return response()->noContent();
     }
 }
+

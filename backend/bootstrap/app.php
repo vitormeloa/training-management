@@ -4,6 +4,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,21 +14,19 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->api(prepend: [
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        $middleware->api([
+            EnsureFrontendRequestsAreStateful::class,
         ]);
-    })
-    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web();
+        $middleware->encryptCookies();
         $middleware->validateCsrfTokens(except: [
-            'http://localhost:8080',
+            'http://localhost:8080/*'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function(AuthenticationException $erro) {
-
+        $exceptions->render(function(Exception $e) {
             return response()->json([
-                'error' => 'Token de autenticação inválido'
+                'error' => $e->getMessage(),
             ], 400);
         });
     })->create();
-
