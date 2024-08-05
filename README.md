@@ -7,9 +7,9 @@ Desenvolver uma aplicação web que inclui uma interface de usuário (frontend) 
 - PHP 8.3
 - MySQL 8.0
 - Laravel 11
-- Vue 3.2
-- Vuex 4.0
-- Vue Router 4.0
+- Vue 2.6
+- Vuex 3.6
+- Vue Router 3.5
 - Axios
 - Docker
 - Docker Compose
@@ -30,13 +30,6 @@ project-root/
 │   ├── composer.json
 │   ├── composer.lock
 │   ├── ...
-├── docker/
-│   ├── php/
-│   │   ├── Dockerfile
-│   │   └── entrypoint.sh
-│   ├── vue/
-│   │   └── Dockerfile
-│   ├── docker-compose.yml
 ├── frontend/
 │   ├── public/
 │   ├── src/
@@ -45,28 +38,28 @@ project-root/
 │   │   ├── store/
 │   │   ├── views/
 │   │   ├── App.vue
-│   │   ├── apiClient.js
 │   │   ├── main.js
 │   ├── babel.config.js
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── vue.config.js
 │   ├── .eslintrc.js
+│   ├── ...
 ├── setup.sh
 └── README.md
+└── .gitignore
+└── LICENSE
 ```
 
 ## Requisitos
-- Docker
-- Docker Compose
 - Bash shell (para rodar o script de setup)
 
 ## Configuração do Ambiente
 
 ### 1. Clonar o Repositório
 ```bash
-git clone https://github.com/vitormeloa/teste-grupo-plan.git
-cd teste-grupo-plan
+git clone https://github.com/vitormeloa/gestao-de-treinamentos.git
+cd gestao-de-treinamentos
 ```
 
 ### 2. Executar o Script de Setup
@@ -77,20 +70,28 @@ chmod +x setup.sh
 
 ### 3. Acessar a Aplicação
 - O frontend estará acessível em http://localhost:8080
-- A API backend estará acessível em http://localhost:9000/api
+- A API backend estará acessível em http://localhost/api
 
-## Instruções Adicionais
+## Comandos Adicionais (Opcional)
 
-### Rodar Migrations
-Para rodar as migrations, execute o comando abaixo:
+Os comandos abaixo são opcionais para casos específicos e não são necessários para rodar a aplicação, pois já são aplicados no script de setup do projeto.
+
+### 1. Rodar os Testes
 ```bash
-docker exec -it backend php artisan migrate
+cd backend
+./vendor/bin/sail pest
 ```
 
-### Popular o Banco de Dados
-Para popular o banco de dados com dados de teste, execute o comando abaixo:
+### 2. Rodar os Seeds
 ```bash
-docker exec -it backend php artisan db:seed
+cd backend
+./vendor/bin/sail artisan db:seed
+```
+
+### 3. Rodar os Migrations
+```bash
+cd backend
+./vendor/bin/sail artisan migrate:fresh
 ```
 
 ## Estrutura do Código
