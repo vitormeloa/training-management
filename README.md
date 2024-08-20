@@ -1,12 +1,12 @@
-# Projeto de Gestão de Treinamentos
+# Training Management Project
 
-## Objetivo
-Desenvolver uma aplicação web que inclui uma interface de usuário (frontend) conectada a uma API REST.
+## Objective
+Develop a web application that includes a user interface (frontend) connected to a REST API.
 
-## Contexto
-O gestor da empresa XYZ precisa gerenciar em seu sistema se seus subordinados estão realizando os treinamentos corporativos disponibilizados na plataforma.
+## Context
+The manager at XYZ company needs a system to track whether their subordinates are completing the corporate training programs available on the platform.
 
-## Tecnologias Utilizadas
+## Technologies
 - PHP 8.3
 - MySQL 8.0
 - Laravel 11
@@ -17,7 +17,7 @@ O gestor da empresa XYZ precisa gerenciar em seu sistema se seus subordinados es
 - Docker
 - Docker Compose
 
-## Estrutura do Projeto
+## Project Structure
 ```plaintext
 project-root/
 ├── backend/
@@ -54,38 +54,38 @@ project-root/
 └── LICENSE
 ```
 
-## Requisitos
-- Bash shell (para rodar o script de setup)
+## Requirements
+- Bash shell (to run the setup script)
 
-## Configuração do Ambiente
+## Environment Setup
 
-### 1. Clonar o Repositório
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/vitormeloa/gestao-de-treinamentos.git
-cd gestao-de-treinamentos
+git clone https://github.com/vitormeloa/training-management.git
+cd training-management
 ```
 
-### 2. Executar o Script de Setup
+### 2. Run the Setup Script
 ```bash
 chmod +x setup.sh
 ./setup.sh
 ```
 
-### 3. Acessar a Aplicação
-- O frontend estará acessível em http://localhost:8080
-- A API backend estará acessível em http://localhost/api
+### 3. Access the Application
+- The frontend will be accessible at http://localhost:8080
+- The backend API will be accessible at http://localhost/api
 
-## Comandos Adicionais (Opcional)
+## Additional Commands (Optional)
 
-Os comandos abaixo são opcionais para casos específicos e não são necessários para rodar a aplicação, pois já são aplicados no script de setup do projeto.
+The following commands are optional and are not required to run the application as they are already applied in the project setup script.
 
-### 1. Rodar os Testes
+### 1. Run Tests
 ```bash
 cd backend
 ./vendor/bin/sail pest
 ```
 
-### 2. Rodar os Seeds
+### 2. Run Migrations
 ```bash
 cd backend
 ./vendor/bin/sail artisan db:seed
@@ -97,24 +97,24 @@ cd backend
 ./vendor/bin/sail artisan migrate:fresh
 ```
 
-## Estrutura do Código
+## Code Structure
 ### Backend
-- A API foi construída usando o framework Laravel. A estrutura segue as convenções padrão do Laravel.
-- O código fonte da API está localizado na pasta `backend`.
-- As rotas da API estão definidas no arquivo `routes/api.php`.
-- Os controllers estão localizados na pasta `app/Http/Controllers`.
-- Os models estão localizados na pasta `app/Models`.
-- As migrations estão localizadas na pasta `database/migrations`.
-- Os seeds estão localizados na pasta `database/seeders`.
-- Os testes estão localizados na pasta `tests`.
-- A configuração do banco de dados está no arquivo `.env`.
+- The API is built using the Laravel framework. The structure follows Laravel's standard conventions.
+- The API source code is located in the backend folder.
+- The API routes are defined in the routes/api.php file.
+- The controllers are located in the app/Http/Controllers folder.
+- The models are located in the app/Models folder.
+- The migrations are located in the database/migrations folder.
+- The seeds are located in the database/seeders folder.
+- The tests are located in the tests folder.
+- The database configuration is in the .env file.
 
 ### Frontend
-- O frontend foi construído usando o framework Vue.js. A estrutura segue as convenções padrão do Vue.js.
-- O código fonte do frontend está localizado na pasta `frontend`.
-- Os componentes estão localizados na pasta `src/components`.
-- As rotas estão definidas na pasta `src/router`.
-- O estado global da aplicação é gerenciado pelo Vuex, localizado na pasta `src/store`.
-- As chamadas à API são feitas pelo Axios, através do arquivo `src/apiClient.js`.
-- O arquivo `src/main.js` é o ponto de entrada da aplicação.
-- O arquivo `vue.config.js` contém a configuração do Vue CLI.
+- The frontend is built using the Vue.js framework. The structure follows Vue.js standard conventions.
+- The frontend source code is located in the frontend folder.
+- The components are located in the src/components folder.
+- The routes are defined in the src/router folder.
+- The global application state is managed by Vuex, located in the src/store folder.
+- API calls are made using Axios, through the src/apiClient.js file.
+- The src/main.js file is the entry point of the application.
+- The vue.config.js file contains the Vue CLI configuration.
